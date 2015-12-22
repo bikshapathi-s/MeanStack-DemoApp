@@ -1,0 +1,77 @@
+<section data-ng-if="authentication.user" data-ng-controller="LeaveController as leave" class="text-center">
+    <h3>Welcome, {{authentication.user.username}}!</h3>
+    <a href="/auth/signout">Sign out</a>
+
+    <div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
+        <form class="signin form-horizontal" novalidate autocomplete="off">
+            <fieldset>
+                <div class="form-group">
+                    <label for="type">Leave Type</label>
+                    <select class="form-control" name="type" id="type"
+                            data-ng-model="leave.leaveType.type">
+                        <option selected>Casual-Sick Leave</option>
+                        <option>Long Leave</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fromDate">Strat Date</label>
+                    <input type="date" id="fromDate" name="fromDate" class="form-control"
+                           data-ng-model="leave.fromDate">
+                </div>
+                <div class="form-group">
+                    <label for="toDate">End Date</label>
+                    <input type="date" id="toDate" name="toDate" class="form-control"
+                           data-ng-model="leave.toDate">
+                </div>
+                <div class="form-group">
+                    <label for="approval">Approval</label>
+
+                    <select class="form-control" name="approval" id="approval"
+                            data-ng-model="leave.approval">
+                        <option>Pradeep</option>
+                        <option>Bharath</option>
+                        <option>Balasubramaniam</option>
+                        <option selected>Ashok</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="alternateApprover">Alternate-Approvar</label>
+                    <select class="form-control" name="alternateApprover" id="alternateApprover"
+                            data-ng-model="leave.alternateApprover">
+                        <option>Poorna</option>
+                        <option selected>Deep Datta</option>
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="balance">Balence Leves</label>
+                    <input type="text" id="balance" name="balance" class="form-control"
+                           data-ng-model="leave.balance" placeholder="10">
+                </div>
+                <div class="form-group">
+                    <label for="reason">Reason</label>
+                        <textarea id="reason" name="reason" class="form-control"
+                                  data-ng-model="leave.reason" placeholder="Reason for Applying Leave"></textarea>
+                </div>
+                <div class="form-group">
+                    <table>
+                        <tr>
+                            <td style="padding-right:75px">
+                                <button type="submit" ng-click="leave.applyLeave()"
+                                        class=" btn btn-large btn-success shiny">ApplyNow
+                                </button>
+                            </td>
+                            <td>
+                                <button type="reset" class=" btn btn-danger shiny">Reset</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div data-ng-show="error" class="text-center text-danger">
+                    <strong>{{error}}</strong>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</section>
+<script src="../controllers/leave.client.controller.js"></script>

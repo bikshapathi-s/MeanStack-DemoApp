@@ -1,0 +1,25 @@
+<div class="container">
+  <!--  <h1>{{authentication.userlist}}</h1>-->
+    <table class="table" >
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile Number</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in authentication.userlist">
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.mobileNumber}}</td>
+            <td>
+                <button class="btn btn-danger" ng-click="deleteUsersInfo(user._id)">Remove</button>
+            </td>
+            <td>
+                <button class="btn btn-warning" ng-click="getUserById(user._id)">Edit</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,107 @@
+<div ng-if="!authentication.editedUser" class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
+<form  class="signin form-horizontal" novalidate autocomplete="off">
+    <fieldset>
+        <!--<div class="form-group">
+            <label for="org">Name Of ORG</label>
+            <input type="text" required id="org" name="org" class="form-control" data-ng-model="credentials.org" placeholder="Organization Name">
+        </div>-->
+        <div class="form-group">
+            <label for="firstName1">First Name</label>
+            <input type="text" required id="firstName1" name="firstName1" class="form-control" data-ng-model="authentication.user.firstName" placeholder="First Name">
+        </div>
+        <div class="form-group">
+            <label for="lastName1">Last Name</label>
+            <input type="text" id="lastName1" name="lastName1" class="form-control" data-ng-model="authentication.user.lastName" placeholder="Last Name">
+        </div>
+        <div class="form-group">
+            <label for="email1">Email</label>
+            <input type="text" id="email1" name="email1" class="form-control" data-ng-model="authentication.user.email" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label for="username1">Username</label>
+            <input type="text" id="username1" name="username1" class="form-control" data-ng-model="authentication.user.username" placeholder="Username">
+        </div>
+       <!-- <div class="form-group">
+            <label for="password1">Password</label>
+            <input type="password" id="password1" name="password1" class="form-control" data-ng-model="authentication.user.password" placeholder="Password">
+        </div>-->
+        <div class="form-group">
+            <label for="mobileNumber1">Mobile Number</label>
+            <input type="text" id="mobileNumber1" name="mobileNumber1" class="form-control" data-ng-model="authentication.user.mobileNumber" placeholder="eg:9848022338">
+        </div>
+        <div class="text-center form-group">
+            <table>
+                <tr>
+                    <td style="padding-right:75px">
+                        <button ng-click="editUserProfile()" class=" btn btn-large btn-success shiny">Update</button>
+                    </td>
+                    <td>
+                        <a href="/#!/"><button type="reset" class=" btn btn-info shiny">Go back</button></a>
+                    </td>
+                </tr>
+                <!--<button type="submit" class="btn btn-large btn-primary">Update</button>&nbsp; or&nbsp;
+                <a href="/#!/signin" class="show-signup">Sign in</a>-->
+            </table>
+
+        </div>
+        <div data-ng-show="error" class="text-center text-danger">
+            <strong>{{error}}</strong>
+        </div>
+    </fieldset>
+</form>
+</div>
+
+
+
+<div ng-if="authentication.editedUser" class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
+    <form  class="signin form-horizontal" novalidate autocomplete="off">
+        <fieldset>
+            <!--<div class="form-group">
+                <label for="org">Name Of ORG</label>
+                <input type="text" required id="org" name="org" class="form-control" data-ng-model="credentials.org" placeholder="Organization Name">
+            </div>-->
+            <div class="form-group">
+                <label for="firstName1">First Name</label>
+                <input type="text" required id="firstName1" name="firstName1" class="form-control" data-ng-model="authentication.editedUser.firstName" placeholder="First Name">
+            </div>
+            <div class="form-group">
+                <label for="lastName1">Last Name</label>
+                <input type="text" id="lastName1" name="lastName1" class="form-control" data-ng-model="authentication.editedUser.lastName" placeholder="Last Name">
+            </div>
+            <div class="form-group">
+                <label for="email1">Email</label>
+                <input type="text" id="email1" name="email1" class="form-control" data-ng-model="authentication.editedUser.email" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label for="username1">Username</label>
+                <input type="text" id="username1" name="username1" class="form-control" data-ng-model="authentication.editedUser.username" placeholder="Username">
+            </div>
+            <!-- <div class="form-group">
+                 <label for="password1">Password</label>
+                 <input type="password" id="password1" name="password1" class="form-control" data-ng-model="authentication.user.password" placeholder="Password">
+             </div>-->
+            <div class="form-group">
+                <label for="mobileNumber1">Mobile Number</label>
+                <input type="text" id="mobileNumber1" name="mobileNumber1" class="form-control" data-ng-model="authentication.editedUser.mobileNumber" placeholder="eg:9848022338">
+            </div>
+            <div class="text-center form-group">
+                <table>
+                    <tr>
+                        <td style="padding-right:75px">
+                            <button ng-click="editUserProfile()" class=" btn btn-large btn-success shiny">Update</button>
+                        </td>
+                        <td>
+                            <a href="/#!/"><button type="reset" class=" btn btn-info shiny">Go back</button></a>
+                        </td>
+                    </tr>
+                    <!--<button type="submit" class="btn btn-large btn-primary">Update</button>&nbsp; or&nbsp;
+                    <a href="/#!/signin" class="show-signup">Sign in</a>-->
+                </table>
+
+            </div>
+            <div data-ng-show="error" class="text-center text-danger">
+                <strong>{{error}}</strong>
+            </div>
+        </fieldset>
+    </form>
+</div>

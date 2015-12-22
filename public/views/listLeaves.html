@@ -1,0 +1,18 @@
+<section data-ng-controller="LeaveController as leave" class="text-center">
+    <table ng-table="tableParams" ng-model="leave.data" class="table" show-filter="true">
+        <tr ng-class="{info: $even, active: $odd}" ng-repeat="entry in $data">
+            <td data-title="'Type Of Leave'" filter="{ 'type': 'text' }">{{entry.type}}</td>
+            <td data-title="'From Date'">{{entry.fromDate}}</td>
+            <td data-title="'To Date'">{{entry.toDate}}</td>
+            <td data-title="'Approval'">{{entry.approval}}</td>
+            <td data-title="'AlterNate Approval'">{{entry.alternateApprover}}</td>
+            <td><button class="btn btn-danger" ng-click="leave.deleteLeave(entry._id)">Remove</button></td>
+            <td><button class="btn btn-warning" ng-click="leave.editLeave(entry._id)">Edit</button></td>
+        </tr>
+        <tr>
+            <td ng-show="repCtrl.noData" ng-bind="repCtrl.noData"></td>
+        </tr>
+    </table>
+
+
+</section>
