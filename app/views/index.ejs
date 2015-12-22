@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    	<title>Nextsphere LeaveMS</title>
+
+    	<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+  	</head>
+  	<body>
+    <div id="header" class="col-md-12" style="background-color:darkcyan">
+        <div class="col-md-6">
+            <h1 class="top-org-name">
+                NextSphere Technology
+            </h1>
+            <!--<div class="nav" ng-if="authentication.user">
+                <a class="col-md-12 col-md-offset-12" style ="color:red" href="/auth/signout">Sign-Out</a>
+            </div>-->
+            <div class="clear">
+            </div>
+        </div>
+    </div>
+  		<section ng-view></section>
+		
+		<script type="text/javascript">
+			window.user = <%- user || 'null' %>;
+		</script>
+
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.js"></script>
+
+		<script type="text/javascript" src="application.js"></script>
+		<script type="text/javascript" src="controllers/authentication.client.controller.js"></script>
+		<script type="text/javascript" src="controllers/index.client.controller.js"></script>
+		<script type="text/javascript" src="services/authentication.client.service.js"></script>
+		<script type="text/javascript" src="config/application.client.routes.js"></script>
+
+        <script type="text/javascript" src="controllers/leave.client.controller.js"></script>
+         <script type="text/javascript" src="config/leave.client.routes.js"></script>
+
+
+  	</body>
+</html>
