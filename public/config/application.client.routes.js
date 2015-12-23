@@ -7,7 +7,7 @@ angular.module('mean').config(['$routeProvider',
         $routeProvider.
             when('/', {
                 templateUrl: 'views/index.html',
-                controller: 'IndexController'
+                controller: 'AuthenticationController'
             }).
             when('/signup', {
                 templateUrl: 'views/signup.html',
