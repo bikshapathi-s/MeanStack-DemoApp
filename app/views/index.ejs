@@ -1,51 +1,518 @@
 <!DOCTYPE html>
 <html>
-	<head>
-    	<title>Nextsphere LeaveMS</title>
-        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/pegasus/0.3.2/pegasus.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/locale/af.js"></script>
-    	<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.0/animate.min.css">
-        <link id="beyond-link" href="//mindpowerclinic.com/borrgo/assets/css/beyond.min.css" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<head>
+    <title>Nextsphere LeaveMS</title>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/pegasus/0.3.2/pegasus.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/locale/af.js"></script>
 
-		<!-- Optional theme -->
-		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-  	</head>
-  	<body>
-    <div id="header" class="col-md-12" style="background-color:darkcyan">
-        <div class="col-md-6">
-            <h1 class="top-org-name">
-                NextSphere Technology
-            </h1>
-            <!--<div class="nav" ng-if="authentication.user">
-                <a class="col-md-12 col-md-offset-12" style ="color:red" href="/auth/signout">Sign-Out</a>
-            </div>-->
-            <div class="clear">
-            </div>
-        </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/js/bootstrap-datepicker.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.0/animate.min.css">
+    <link id="beyond-link" href="//mindpowerclinic.com/borrgo/assets/css/beyond.min.css" rel="stylesheet"
+          type="text/css"/>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+</head>
+<body>
+<div id="header" class="col-md-12" style="background-color:#008B8B">
+    <div class="col-md-6">
+        <h1 class="top-org-name">
+            NextSphere Technology
+        </h1>
     </div>
-  		<section ng-view></section>
-		
-		<script type="text/javascript">
-			window.user = <%- user || 'null' %>;
-		</script>
+    <!--<script type="text/javascript">
+        $(document).ready(function(){
+            alert("had hide::::"+$("#initial").hasClass('hide'));
+            $("#initial").addClass('hide');
+            alert("had hide::::"+$("#initial").hasClass('hide'));
+        });
+    </script>-->
+    <div class="col-md-6 ng-scope" id="initial" data-ng-controller="LeaveController as leave">
+        <a class="btn btn-large btn-success col-md-3 shiny" href="/#!/signup">Create New User </a>
+        <button class="btn btn-large btn-success col-md-3 shiny ng-scope" data-ng-controller="AuthenticationController" ng-click="editUserProfile1()">UpdateUserProfile
+        </button>
+        <button class="btn btn-large btn-success col-md-3 shiny ng-scope" data-ng-controller="AuthenticationController" ng-click="getUsersInfo()">ListUsers
+        </button>
+        <a class="col-md-2 btn btn-alrge btn-success shiny" href="/auth/signout">Sign out</a>
 
-		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
-		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.js"></script>
+    </div>
+    <!--<div class="nav" ng-if="authentication.user">
+        <a class="col-md-12 col-md-offset-12" style ="color:red" href="/auth/signout">Sign-Out</a>
+    </div>-->
+</div>
+<div class="col-md-2">
+    <div id="sidebar" class='' style="width: 210px;background-color: rgba(128, 155, 179, 0.46);position:relative;">
+        <!-- Page Sidebar Header-->
+        <!--<div class="sidebar-header-wrapper">
+            <input class="searchinput" type="text">
+            <i class="searchicon fa fa-search"></i>
+            <div class="searchhelper">Search Reports, Charts, Emails or Notifications</div>
+        </div>-->
+        <!-- /Page Sidebar Header -->
+        <!-- Sidebar Menu -->
+        <ul class="nav sidebar-menu">
+            <!--Dashboard-->
+            <li>
+                <a href="#">
+                    <i class="menu-icon glyphicon glyphicon-home"></i>
+                    <span class="menu-text"> Home </span>
+                </a>
+            </li>
+            <!--Databoxes-->
+            <li>
+                <a href="#">
+                    <i class="menu-icon glyphicon glyphicon-tasks"></i>
+                    <span class="menu-text"> Data Boxes</span>
+                </a>
+            </li>
+            <!--Widgets-->
+            <li>
+                <a href="#">
+                    <i class="menu-icon fa fa-th"></i>
+                    <span class="menu-text"> Widgets </span>
+                </a>
+            </li>
+            <!--UI Elements-->
+            <li>
+                <a href="#" class="menu-dropdown">
+                    <i class="menu-icon fa fa-desktop"></i>
+                    <span class="menu-text"> Elements </span>
 
-		<script type="text/javascript" src="application.js"></script>
-		<script type="text/javascript" src="controllers/authentication.client.controller.js"></script>
-		<script type="text/javascript" src="controllers/index.client.controller.js"></script>
-		<script type="text/javascript" src="services/authentication.client.service.js"></script>
-		<script type="text/javascript" src="config/application.client.routes.js"></script>
+                    <i class="menu-expand"></i>
+                </a>
 
-        <script type="text/javascript" src="controllers/leave.client.controller.js"></script>
-         <script type="text/javascript" src="config/leave.client.routes.js"></script>
+                <!--<ul class="submenu">
+                    <li>
+                        <a href="#">
+                            <span class="menu-text">Basic Elements</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-dropdown">
+                                <span class="menu-text">
+                                    Icons
+                                </span>
+                            <i class="menu-expand"></i>
+                        </a>
+
+                        <ul class="submenu">
+                            <li>
+                                <a href="#">
+                                    <i class="menu-icon fa fa-rocket"></i>
+                                    <span class="menu-text">Font Awesome</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="menu-icon glyphicon glyphicon-stats"></i>
+                                    <span class="menu-text">Glyph Icons</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="menu-icon typcn typcn-location-outline"></i>
+                                    <span class="menu-text"> Typicons</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="menu-icon wi-day-snow"></i>
+                                    <span class="menu-text">Weather Icons</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="menu-text">Tabs &amp; Accordions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="menu-text">Alerts &amp; Tooltips</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="menu-text">Modals &amp; Wells</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="menu-text">Buttons</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="menu-text"> Nestable List</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="menu-text">Treeview</span>
+                        </a>
+                    </li>
+                </ul>-->
+            </li>
+            <!--Tables-->
+            <li>
+                <a href="#" class="menu-dropdown">
+                    <i class="menu-icon fa fa-table"></i>
+                    <span class="menu-text"> List Users </span>
+
+                    <i class="menu-expand"></i>
+                </a>
+
+                <!--  <ul class="submenu">
+                      <li>
+                          <a href="#">
+                              <span class="menu-text">Simple &amp; Responsive</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                              <span class="menu-text">Data Tables</span>
+                          </a>
+                      </li>
+                  </ul>-->
+            </li>
+            <!--Forms-->
+            <li class="active">
+                <a href="#" class="menu-dropdown">
+                    <i class="menu-icon fa fa-pencil-square-o"></i>
+                    <span class="menu-text"> Leave Application Form </span>
+
+                    <i class="menu-expand"></i>
+                </a>
+
+                <!--<ul style="display: none;" class="submenu">
+                    <li class="active">
+                        <a href="#">
+                            <span class="menu-text">Form Layouts</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <span class="menu-text">Form Inputs</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <span class="menu-text">Data Pickers</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="form-wizard.html">
+                            <span class="menu-text">Wizard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="menu-text">Validation</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="menu-text">Editors</span>
+                        </a>
+                    </li>
+                </ul>-->
+            </li>
+            <!--Charts-->
+            <li>
+                <a href="#" class="menu-dropdown">
+                    <i class="menu-icon fa fa-bar-chart-o"></i>
+                    <span class="menu-text"> Charts </span>
+
+                    <i class="menu-expand"></i>
+                </a>
+
+                <!--<ul class="submenu">
+                    <li>
+                        <a href="#">
+                            <span class="menu-text">Flot Charts</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <span class="menu-text"> Morris Charts</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="menu-text">Sparkline Charts</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="menu-text">Easy Pie Charts</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="menu-text"> ChartJS</span>
+                        </a>
+                    </li>
+                </ul>-->
+            </li>
+            <!--Profile-->
+            <li>
+                <a href="#">
+                    <i class="menu-icon fa fa-picture-o"></i>
+                    <span class="menu-text">Edit Profile</span>
+                </a>
+            </li>
+            <!--Mail-->
+            <li>
+                <a href="#" class="menu-dropdown">
+                    <i class="menu-icon fa fa-envelope-o"></i>
+                    <span class="menu-text"> Mail </span>
+
+                    <i class="menu-expand"></i>
+                </a>
+
+                <!-- <ul class="submenu">
+                     <li>
+                         <a href="#">
+                             <span class="menu-text">Inbox</span>
+                         </a>
+                     </li>
+
+                     <li>
+                         <a href="#">
+                             <span class="menu-text">View Message</span>
+                         </a>
+                     </li>
+                     <li>
+                         <a href="#">
+                             <span class="menu-text">Compose Message</span>
+                         </a>
+                     </li>
+                 </ul>-->
+            </li>
+            <!--Calendar-->
+            <li>
+                <a href="#">
+                    <i class="menu-icon fa fa-calendar"></i>
+                            <span class="menu-text">
+                                Calendar
+                            </span>
+                </a>
+            </li>
+            <!--Pages-->
+            <li>
+                <a href="#" class="menu-dropdown">
+                    <i class="menu-icon glyphicon glyphicon-paperclip"></i>
+                    <span class="menu-text"> Pages </span>
+
+                    <i class="menu-expand"></i>
+                </a>
+                <!-- <ul class="submenu">
+                     <li>
+                         <a href="#">
+                             <span class="menu-text">Timeline</span>
+                         </a>
+                     </li>
+                     <li>
+                         <a href="#">
+                             <span class="menu-text">Pricing Tables</span>
+                         </a>
+                     </li>
+
+                     <li>
+                         <a href="#">
+                             <span class="menu-text">Invoice</span>
+                         </a>
+                     </li>
+
+                     <li>
+                         <a href="#">
+                             <span class="menu-text">Login</span>
+                         </a>
+                     </li>
+                     <li>
+                         <a href="#">
+                             <span class="menu-text">Register</span>
+                         </a>
+                     </li>
+                     <li>
+                         <a href="#">
+                             <span class="menu-text">Lock Screen</span>
+                         </a>
+                     </li>
+                     <li>
+                         <a href="#">
+                             <span class="menu-text"> Typography </span>
+                         </a>
+                     </li>
+                 </ul>-->
+            </li>
+            <!--More Pages-->
+            <li>
+                <a href="#" class="menu-dropdown">
+                    <i class="menu-icon glyphicon glyphicon-link"></i>
+
+                            <span class="menu-text">
+                                More Pages
+                            </span>
+
+                    <i class="menu-expand"></i>
+                </a>
+
+                <!--<ul class="submenu">
+                    <li>
+                        <a href="#">
+                            <span class="menu-text">Error 404</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <span class="menu-text"> Error 500</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="menu-text">Blank Page</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="menu-text"> Grid</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-dropdown">
+                                <span class="menu-text">
+                                    Multi Level Menu
+                                </span>
+                            <i class="menu-expand"></i>
+                        </a>
+
+                        <ul class="submenu">
+                            <li>
+                                <a href="#">
+                                    <i class="menu-icon fa fa-camera"></i>
+                                    <span class="menu-text">Level 3</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="menu-dropdown">
+                                    <i class="menu-icon fa fa-asterisk"></i>
+
+                                        <span class="menu-text">
+                                            Level 4
+                                        </span>
+                                    <i class="menu-expand"></i>
+                                </a>
+
+                                <ul class="submenu">
+                                    <li>
+                                        <a href="#">
+                                            <i class="menu-icon fa fa-bolt"></i>
+                                            <span class="menu-text">Some Item</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#">
+                                            <i class="menu-icon fa fa-bug"></i>
+                                            <span class="menu-text">Another Item</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>-->
+            </li>
+            <!--Right to Left-->
+            <li>
+                <a href="#" class="menu-dropdown">
+                    <i class="menu-icon fa fa-align-right"></i>
+                    <span class="menu-text"> Right to Left </span>
+
+                    <i class="menu-expand"></i>
+                </a>
+                <!--<ul class="submenu">
+                    <li>
+                        <a>
+                            <span class="menu-text">RTL</span>
+                            <label class="pull-right margin-top-10">
+                                <input id="rtl-changer" class="checkbox-slider slider-icon colored-primary" type="checkbox">
+                                <span class="text"></span>
+                            </label>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index-rtl-ar.html">
+                            <span class="menu-text">Arabic Layout</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="index-rtl-fa.html">
+                            <span class="menu-text">Persian Layout</span>
+                        </a>
+                    </li>
+                </ul>-->
+            </li>
+        </ul>
+        <!-- /Sidebar Menu -->
+    </div>
+</div>
+<section class="col-md-9" ng-view></section>
+
+<script type="text/javascript">
+    window.user = <%- user || 'null' %>;
+   // alert("USER:::"+window.user);
+    $(document).ready(function () {
+       // alert("had hide::::" + $("#initial").hasClass('hide'));
+        if(window.user==null) {
+            $("#initial").addClass('hide');
+            window.user=undefined;
+        }
+        //alert("had hide::::" + $("#initial").hasClass('hide'));
+    });
+</script>
+<div id="footer" class="col-md-12" style="background-color:#008B8B;margin-top: 5px;height: 45px">
+    <div class="col-md-9"></div>
+    <div class="col-md-3">
+        Copyright © 2012 - 2015 by <a href="https://www.Nextsphere.com">NextSphere</a>
+    </div>
 
 
-  	</body>
+    <!-- <h1 class="top-org-name">
+         copyrights:2015@div class="site-generator">
+         Copyright © 2012 - 2015 by <a href="https://www.designwall.com">DesignWall</a>
+     </h1>-->
+    <!--<div class="nav" ng-if="authentication.user">
+        <a class="col-md-12 col-md-offset-12" style ="color:red" href="/auth/signout">Sign-Out</a>
+    </div>-->
+</div>
+</div>
+
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.js"></script>
+
+<script type="text/javascript" src="application.js"></script>
+<script type="text/javascript" src="controllers/authentication.client.controller.js"></script>
+<script type="text/javascript" src="controllers/index.client.controller.js"></script>
+<script type="text/javascript" src="services/authentication.client.service.js"></script>
+<script type="text/javascript" src="config/application.client.routes.js"></script>
+
+<script type="text/javascript" src="controllers/leave.client.controller.js"></script>
+<script type="text/javascript" src="config/leave.client.routes.js"></script>
+
+
+</body>
 </html>

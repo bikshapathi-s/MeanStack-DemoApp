@@ -1,13 +1,15 @@
+
 <section class="row">
     <!--data-ng-controller="leaveController as leave"-->
     <section data-ng-if="!authentication.user" class="text-center">
-        <div class=" col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4 ng-scope" ng-controller="AuthenticationController">
+        <div class=" col-xs-offset-2 col-xs-8 col-md-offset-2 col-md-6 ng-scope"
+             ng-controller="AuthenticationController">
             <div class="widget flat radius-bordered">
-                <div class="widget-header bg-blue">
-                    <span class="widget-caption">Login Form</span>
+                <div class="widget-header bg-blue" style="width: 535px;">
+                    <span class="widget-caption unAuthorized">Login Form</span>
                 </div>
-                <div class="widget-body">
-                    <div id="registration-form">
+                <div class="widget-body" style="height: 300px;width: 535px;">
+                    <div id="registration-form" class="LoginForm">
                         <form data-ng-submit="signin()" class="signin form-horizontal" role="form"
                               style="padding: 20px;"
                               autocomplete="off">
@@ -33,8 +35,6 @@
                                 </div>
                                 <div class="text-center form-group">
                                     <button type="submit" class="btn btn-primary">Sign in</button>
-                                    &nbsp; or&nbsp;
-                                    <a href="/#!/signup">Sign up</a>
                                 </div>
                                 <div data-ng-show="error" class="text-center text-danger">
                                     <strong>{{error}}</strong>
@@ -49,16 +49,37 @@
         <a href="/#!/signin">Sign in</a>-->
     </section>
     <section data-ng-if="authentication.user" data-ng-controller="LeaveController as leave" class="text-center">
-        <h3>Welcome, {{authentication.user.username}}!</h3>
-        <a href="/auth/signout">Sign out</a>
+
+        <h3 class="col-md-7" >Welcome, {{authentication.user.username}}!</h3>
+
+        <!--<a href="/auth/signout">Sign out</a>
         <button data-ng-controller="AuthenticationController" class="btn btn-large btn-success shiny"
                 ng-click="editUserProfile1()">UpdateUserProfile
         </button>
         <button data-ng-controller="AuthenticationController" class="btn btn-large btn-success shiny"
                 ng-click="getUsersInfo()">ListUsers
         </button>
+        &nbsp; or&nbsp;
+        <a href="/#!/signup" class="btn btn-large btn-success shiny"
+                >Create New User </a>-->
+        <script type="application/javascript">
+            /**
+             * Created by bsamudrala on 29-12-2015.
+             */
+                // When the document is ready
 
-        <div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
+            $(document).ready(function () {
+                $('#fromDate').on("click",function(e){
+                    $('#fromDate').datepicker();
+                });
+                $('#toDate').click(function(e){
+                    $('#toDate').datepicker();
+                });
+            });
+
+        </script>
+
+        <!--<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
             <form data-ng-submit="applyLeave()" method="POST" name="LeaveApplicationForm" class="signin form-horizontal"
                   novalidate autocomplete="off">
                 <fieldset>
@@ -70,12 +91,12 @@
                             <option>Long Leave</option>
                         </select>
                     </div>
-                    <!-- <div class="form-group">
+                    &lt;!&ndash; <div class="form-group">
                          <input class="form-control date-picker" id="id-date-picker-1" data-ng-model="leave.fromDate" type="text" placeholder="dd-mm-yyyy" data-date-format="dd-mm-yyyy">
                                                  <span class="input-group-addon">
                                                      <i class="fa fa-calendar"></i>
                                                  </span>
-                     </div>-->
+                     </div>&ndash;&gt;
                     <div class="form-group">
                         <label for="fromDate">Strat Date</label>
                         <input type="date" id="fromDate" name="fromDate" class="form-control"
@@ -119,7 +140,7 @@
                     <div class="form-group">
                         <table>
                             <tr>
-                                <!--<td style="padding-right:75px">-->
+                                &lt;!&ndash;<td style="padding-right:75px">&ndash;&gt;
                                 <td ng-if="!leave.isEdited">
                                     <button type="submit" class=" btn btn-large btn-success shiny"
                                             data-ng-disabled="LeaveApplicationForm.$invalid">ApplyNow
@@ -140,6 +161,108 @@
                     </div>
                 </fieldset>
             </form>
+        </div>-->
+        <div class=" col-xs-offset-2 col-xs-8 col-md-offset-2 col-md-6 ng-scope">
+            <div class="widget flat radius-bordered">
+                <div class="widget-header bg-blue">
+                    <span class="widget-caption">LeaveApplicationForm</span>
+                </div>
+                <div class="widget-body">
+                    <div id="registration1-form">
+                        <div data-ng-show="error" class="text-center text-danger">
+                            <strong>{{error}}</strong>
+                        </div>
+                        <form data-ng-submit="applyLeave()" class="signin form-horizontal" novalidate autocomplete="off"
+                              role="form" style="padding: 20px;">
+                            <div class="form-title">
+                                Leave Information
+                            </div>
+                            <div class="form-group">
+                             <span class="input-icon icon-right">
+                                 <select type="text" class="form-control" name="type" id="type"
+                                         placeholder="Leave Type"
+                                         data-ng-model="leave.leaveType.type" required><i
+                                         class="glyphicon glyphicon-user circular"></i>
+                                     <option selected>Casual-Sick Leave</option>
+                                     <option>Long Leave</option>
+                                 </select>
+                             </span>
+                            </div>
+                            <div class="form-group" id="fromDate">
+                            <span class="input-icon icon-right">
+                                 <input type="date" class="form-control"
+                                        placeholder="dd-mm-yyyy"
+                                        data-ng-model="leave.fromDate" required>
+                                <i class="glyphicon glyphicon-calendar circular"></i>
+                            </span>
+                            </div>
+                            <div class="form-group" id="toDate">
+                            <span class="input-icon icon-right input-group date">
+                                 <input type="date" class="form-control"
+                                        placeholder="dd-mm-yyyy"
+                                        data-ng-model="leave.toDate" required>
+                                <i class="glyphicon glyphicon-calendar circular"></i>
+                            </span>
+                            </div>
+                            <div class="form-group">
+                            <span class="input-icon icon-right input-group date">
+                                <select type="text" class="form-control"  id="approval"
+                                        placeholder="Approval"
+                                        data-ng-model="leave.approval" required>
+                                    <i class="fa fa-envelope-o circular"></i>
+                                    <option>pradeep</option>
+                                    <option>bharath</option>
+                                    <option>ashok</option>
+                                </select>
+                             </span>
+                            </div>
+                            <div class="form-group">
+                            <span class="input-icon icon-right">
+                                <select type="text" class="form-control" name="alternateApproval" id="alternateApproval"
+                                        placeholder="AlternateApproval"
+                                        data-ng-model="leave.alternateApprover" required>
+                                    <i class="fa fa-envelope-o circular"></i>
+                                    <option>pradeep</option>
+                                    <option>bharath</option>
+                                    <option>ashok</option>
+                                </select>
+                             </span>
+                            </div>
+                            <div class="form-group">
+							<span class="input-icon icon-right">
+                                <textarea class="form-control" name="reason" id="reason"
+                                          placeholder="Reason"
+                                          data-ng-model="leave.reason" required>
+                                    </textarea>
+                            </span>
+                            </div>
+                            <div class="form-group">
+                                <table>
+                                    <tr>
+                                        <!--<td style="padding-right:75px">-->
+                                        <td class="col-md-7"></td>
+                                        <td ng-if="!leave.isEdited">
+                                            <button type="submit" class=" btn btn-large btn-blue shiny"
+                                                    data-ng-disabled="LeaveApplicationForm.$invalid">ApplyNow
+                                            </button>
+                                        </td>
+                                        <td ng-if="leave.isEdited">
+                                            <button ng-click="edit(leave._id)" class=" btn btn-large btn-blue shiny"
+                                                    data-ng-disabled="LeaveApplicationForm.$invalid">Update
+                                            </button>
+                                        </td>
+
+                                    </tr>
+
+                                </table>
+                            </div>
+                            <div data-ng-show="error" class="text-center text-danger">
+                                <strong>{{error}}</strong>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div ng-if="authentication.listofleaves" class="container">
@@ -155,7 +278,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="leave in authentication.listofleaves">
+                <tr  class="authorized" ng-repeat="leave in authentication.listofleaves">
                     <td>{{leave.leaveType.type}}</td>
                     <td>{{leave.fromDate}}</td>
                     <td>{{leave.toDate}}</td>
@@ -174,5 +297,25 @@
             </table>
         </div>
     </section>
+   <!-- <script type="text/javascript">
+        // When the document is ready
+
+        $(document).ready(function () {
+            alert("Document is ready now");
+            $('#fromDate').on("click",function(e){
+                alert("fromDate clicked");
+
+                $('#fromDate').datepicker();
+            });
+            $('#toDate').click(function(e){
+                alert("toDate clicked");
+                $('#toDate').datepicker({
+                    format: "dd/mm/yyyy"
+                });
+            });
+        });
+    </script>-->
+
     <script src="../controllers/leave.client.controller.js"></script>
+
 </section>                                                
