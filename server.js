@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 
 // Configure Mongoose
 var db = mongoose.connect('mongodb://localhost/LeaveMS');
+// Configure models
 require('./app/models/leavetype.server.model');
 require('./app/models/organization.server.model');
 require('./app/models/role.server.model');

@@ -7,8 +7,10 @@ var Schema  = mongoose.Schema;
 var RoleSchema = new Schema({
     role:{
         type:String,
-        default:'ADMIN'
+        default:'ADMIN',
+        unique:true
     }
 });
 
-mongoose.model('Role',RoleSchema);
+var Role = mongoose.model('Role',RoleSchema);
+module.exports = Role;

@@ -51,42 +51,72 @@ exports.signup = function(req, res) {
 	// Add missing user fields
 	user.provider = 'local';
     var org = new Org();
-    Org.collection.insert(org._doc,function(err,r){
-    });
-	// Then save the user
-    user.organization = org._id;
-	user.save(function(err) {
-		if (err) {
-			return res.send(400, {
-				message: getErrorMessage(err)
-			});
-		} else {
-			// Remove sensitive data before login
-			user.password = undefined;
-			user.salt = undefined;
+    Org.collection.find({name:org.name},function(err,r){
+        if(r==null){
+            Org.collection.insert(org._doc,function(err,r){
+                if(err){
+                    console.log(err.message);
+                }
+            });
+        }else{
+            user.organization = mongoose.Types.ObjectId(org._id);
+            console.log('Org already registered:)')
+        }
+    })
 
-			req.login(user, function(err) {
-				if (err) {
-					res.send(400, err);
-				} else {
-					res.jsonp(user);
-				}
-			});
-		}
-	});
+    var role = new Role();
+    if(req.body.role!=undefined){
+        role.role = req.body.roleStr;
+    }
+    Role.collection.find({role:role.role},function(err,r){
+        if(r==null){
+            Role.collection.insert(role._doc,function(err,r){
+                if(err){
+                    console.log(err.message);
+                }
+            });
+        }else{
+            user.role = mongoose.Types.ObjectId(role._id);
+            console.log('role already existed');
+        }
+    });
+
+    // Then save the user
+   user.role = role._id;
+  //  user.organization = org._id;
+    user.save(function (err) {
+        if (err) {
+            return res.send(400, {
+                message: getErrorMessage(err)
+            });
+        } else {
+            // Remove sensitive data before login
+            user.password = undefined;
+            user.salt = undefined;
+
+            req.login(user, function (err) {
+                if (err) {
+                    console.log(err.message);
+                    res.send(400, err);
+                } else {
+                    res.jsonp(user);
+                }
+            });
+        }
+    });
 };
 /**
  * To update the existed user profile information.
  * **/
-exports.editUserProfile = function(req,res,next){
+exports.editUserProfile = function (req, res, next) {
     var user = new User(req.body);
-    User.findOneAndUpdate({_id: user._id}, user, function(err){
-        if(err){
+    User.findOneAndUpdate({_id: user._id}, user, function (err) {
+        if (err) {
             res.status(500).json({
                 error: err,
                 msg: 'error'
             });
-        }else{
+        } else {
             console.log("user profile updated success fully");
             req.user = user;
             res.status(200).json({
@@ -98,53 +128,53 @@ exports.editUserProfile = function(req,res,next){
     });
     //next();
 },
-    exports.getAllUserInfo = function(req,res,next){
-        User.find(function(err,doc){
-            if(err){
+    exports.getAllUserInfo = function (req, res, next) {
+        User.find(function (err, doc) {
+            if (err) {
                 res.status(500).json({
                     error: err,
                     msg: 'error'
                 });
-            }else{
-                var data=[];
-                    for(var i=0;i<doc.length;i++){
-                      data[i] = new User(doc[i]._doc);
-                    }
+            } else {
+                var data = [];
+                for (var i = 0; i < doc.length; i++) {
+                    data[i] = new User(doc[i]._doc);
+                }
                 res.json(data);
             }
 
         });
         //next();
     },
-    exports.getUserInfoById =function(req,res,next){
+    exports.getUserInfoById = function (req, res, next) {
         var id = req.params.id;
-        User.findOne({_id: id}, function (err, doc){
-            if(err){
+        User.findOne({_id: id}, function (err, doc) {
+            if (err) {
                 res.status(500).json({
                     error: err,
                     msg: 'user information not available....:('
                 });
-            }else{
+            } else {
                 res.json(doc);
             }
         });
     },
-    exports.removeUserProfile = function(req,res,next){
+    exports.removeUserProfile = function (req, res, next) {
         var id = req.params.id;
-       // console.log('deleted id::::::::'+id);
+        // console.log('deleted id::::::::'+id);
         User.remove({_id: id}, function (err, doc) {
-            if(err){
+            if (err) {
                 console.log("unable to delete the user profile :::  :(")
-            }else{
-                User.find(function(err,doc){
-                    if(err){
+            } else {
+                User.find(function (err, doc) {
+                    if (err) {
                         res.status(500).json({
                             error: err,
                             msg: 'error'
                         });
-                    }else{
-                        var data=[];
-                        for(var i=0;i<doc.length;i++){
+                    } else {
+                        var data = [];
+                        for (var i = 0; i < doc.length; i++) {
                             data[i] = new User(doc[i]._doc);
                         }
                         res.json(data);
@@ -158,42 +188,42 @@ exports.editUserProfile = function(req,res,next){
 /**
  * Signin after passport authentication
  */
-exports.signin = function(req, res, next) {
-	passport.authenticate('local', function(err, user, info) {
-		if (err || !user) {
-			res.send(400, info);
-		} else {
-			// Remove sensitive data before login
-			user.password = undefined;
-			user.salt = undefined;
+    exports.signin = function (req, res, next) {
+        passport.authenticate('local', function (err, user, info) {
+            if (err || !user) {
+                res.send(400, info);
+            } else {
+                // Remove sensitive data before login
+                user.password = undefined;
+                user.salt = undefined;
 
-			req.login(user, function(err) {
-				if (err) {
-					res.send(400, err);
-				} else {
-					res.jsonp(user);
-				}
-			});
-		}
-	})(req, res, next);
-};
+                req.login(user, function (err) {
+                    if (err) {
+                        res.send(400, err);
+                    } else {
+                        res.jsonp(user);
+                    }
+                });
+            }
+        })(req, res, next);
+    };
 
 /**
  * OAuth callback
  */
-exports.oauthCallback = function(strategy) {
-	return function(req, res, next) {
-		passport.authenticate(strategy, function(err, user, redirectURL) {
-			if (err || !user) {
-				return res.redirect('/#!/signin');
-			}
-			req.login(user, function(err) {
-				if (err) {
-					return res.redirect('/#!/signin');
-				}
+exports.oauthCallback = function (strategy) {
+    return function (req, res, next) {
+        passport.authenticate(strategy, function (err, user, redirectURL) {
+            if (err || !user) {
+                return res.redirect('/#!/signin');
+            }
+            req.login(user, function (err) {
+                if (err) {
+                    return res.redirect('/#!/signin');
+                }
 
-				return res.redirect(redirectURL || '/');
-			});
-		})(req, res, next);
-	};
+                return res.redirect(redirectURL || '/');
+            });
+        })(req, res, next);
+    };
 };

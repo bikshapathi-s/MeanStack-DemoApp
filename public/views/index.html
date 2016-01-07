@@ -35,6 +35,8 @@
                                 </div>
                                 <div class="text-center form-group">
                                     <button type="submit" class="btn btn-primary">Sign in</button>
+                                    &nbsp; or&nbsp;
+                                    <a href="/#!/signup">Create Account</a>
                                 </div>
                                 <div data-ng-show="error" class="text-center text-danger">
                                     <strong>{{error}}</strong>
@@ -70,10 +72,12 @@
 
             $(document).ready(function () {
                 $('#fromDate').on("click",function(e){
+                    $("#initial").removeClass('hide');
                     $('#fromDate').datepicker();
                 });
                 $('#toDate').click(function(e){
                     $('#toDate').datepicker();
+                    $("#initial").removeClass('hide');
                 });
             });
 
@@ -222,9 +226,8 @@
                                         placeholder="AlternateApproval"
                                         data-ng-model="leave.alternateApprover" required>
                                     <i class="fa fa-envelope-o circular"></i>
-                                    <option>pradeep</option>
-                                    <option>bharath</option>
-                                    <option>ashok</option>
+                                    <option>poorna</option>
+                                    <option>deep</option>
                                 </select>
                              </span>
                             </div>
