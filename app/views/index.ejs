@@ -19,11 +19,12 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
 </head>
 <body>
-<div id="header" class="col-md-12" style="background-color:#008B8B">
+<div id="header" class="col-md-12" style="background-color: rgb(144, 150, 154); height: 60px;" >
     <div class="col-md-6">
-        <h1 class="top-org-name">
+        <!--<h1 class="top-org-name">
             NextSphere Technology
-        </h1>
+        </h1>-->
+        <img src="logo.jpg" alt="NextSphere Technology" height="50" width="200">
     </div>
     <!--<script type="text/javascript">
         $(document).ready(function(){
@@ -33,12 +34,15 @@
         });
     </script>-->
     <div class="col-md-6 ng-scope" id="initial" data-ng-controller="LeaveController as leave">
-        <a class="btn btn-large btn-success col-md-3 shiny" href="/#!/signup">Create New User </a>
+        <!--<a class="btn btn-large btn-success col-md-3 shiny" href="/#!/signup">Create New User </a>
         <button class="btn btn-large btn-success col-md-3 shiny ng-scope" data-ng-controller="AuthenticationController" ng-click="editUserProfile1()">UpdateUserProfile
         </button>
         <button class="btn btn-large btn-success col-md-3 shiny ng-scope" data-ng-controller="AuthenticationController" ng-click="getUsersInfo()">ListUsers
         </button>
-        <a class="col-md-2 btn btn-alrge btn-success shiny" href="/auth/signout">Sign out</a>
+        <a class="col-md-2 btn btn-alrge btn-success shiny" href="/auth/signout">Sign out</a>-->
+        <div class="col-md-offset-10 col-md-2" style="padding-top:20px">
+            <a class="btn btn-darkorange shiny" href="/auth/signout">Sign out</a>
+        </div>
 
     </div>
     <!--<div class="nav" ng-if="authentication.user">
@@ -46,7 +50,7 @@
     </div>-->
 </div>
 <div class="col-md-2">
-    <div id="sidebar" class='' style="width: 210px;background-color: rgba(128, 155, 179, 0.46);position:relative;">
+    <div id="sidebar" class='' style="width: 210px;color:#008B8B;background-color:#CEBD8E;position:relative;">
         <!-- Page Sidebar Header-->
         <!--<div class="sidebar-header-wrapper">
             <input class="searchinput" type="text">
@@ -56,36 +60,60 @@
         <!-- /Page Sidebar Header -->
         <!-- Sidebar Menu -->
         <ul class="nav sidebar-menu">
-            <!--Dashboard-->
+            <!--Home-->
             <li>
-                <a href="#">
+                <a href="/#!/">
                     <i class="menu-icon glyphicon glyphicon-home"></i>
                     <span class="menu-text"> Home </span>
                 </a>
             </li>
-            <!--Databoxes-->
+            <!--createUser-->
             <li>
-                <a href="#">
-                    <i class="menu-icon glyphicon glyphicon-tasks"></i>
-                    <span class="menu-text"> Data Boxes</span>
+                <a href="/#!/signup">
+                    <i class="menu-icon glyphicon glyphicon-plus"></i>
+                    <span class="menu-text"> Create User </span>
+                </a>
+            </li>
+            <!--Profile-->
+            <li>
+                <a data-ng-controller="AuthenticationController" ng-click="editUserProfile1()">
+                    <i class="menu-icon fa fa-picture-o" ></i>
+                    <span class="menu-text">Edit Profile</span>
+                </a>
+            </li>
+            <!--ListUsers-->
+            <li>
+                <a class="menu-dropdown" data-ng-controller="AuthenticationController" ng-click="getUsersInfo()">
+                    <i class="menu-icon fa fa-table"></i>
+                    <span class="menu-text"> List Users </span>
+
+                    <i class="menu-expand"></i>
+                </a>
+            </li>
+            <!--LeaveApplication-->
+            <li class="active">
+                <a href="/#!/apply" class="menu-dropdown">
+                    <i class="menu-icon fa fa-pencil-square-o"></i>
+                    <span class="menu-text"> Leave Application Form </span>
+
+                    <i class="menu-expand"></i>
                 </a>
             </li>
             <!--Widgets-->
             <li>
-                <a href="#">
+                <a href="/#!/">
                     <i class="menu-icon fa fa-th"></i>
                     <span class="menu-text"> Widgets </span>
                 </a>
             </li>
             <!--UI Elements-->
             <li>
-                <a href="#" class="menu-dropdown">
+                <a href="/#!/" class="menu-dropdown">
                     <i class="menu-icon fa fa-desktop"></i>
                     <span class="menu-text"> Elements </span>
 
                     <i class="menu-expand"></i>
                 </a>
-
                 <!--<ul class="submenu">
                     <li>
                         <a href="#">
@@ -160,71 +188,9 @@
                 </ul>-->
             </li>
             <!--Tables-->
-            <li>
-                <a href="#" class="menu-dropdown">
-                    <i class="menu-icon fa fa-table"></i>
-                    <span class="menu-text"> List Users </span>
 
-                    <i class="menu-expand"></i>
-                </a>
-
-                <!--  <ul class="submenu">
-                      <li>
-                          <a href="#">
-                              <span class="menu-text">Simple &amp; Responsive</span>
-                          </a>
-                      </li>
-                      <li>
-                          <a href="#">
-                              <span class="menu-text">Data Tables</span>
-                          </a>
-                      </li>
-                  </ul>-->
-            </li>
             <!--Forms-->
-            <li class="active">
-                <a href="#" class="menu-dropdown">
-                    <i class="menu-icon fa fa-pencil-square-o"></i>
-                    <span class="menu-text"> Leave Application Form </span>
 
-                    <i class="menu-expand"></i>
-                </a>
-
-                <!--<ul style="display: none;" class="submenu">
-                    <li class="active">
-                        <a href="#">
-                            <span class="menu-text">Form Layouts</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                            <span class="menu-text">Form Inputs</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                            <span class="menu-text">Data Pickers</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="form-wizard.html">
-                            <span class="menu-text">Wizard</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="menu-text">Validation</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="menu-text">Editors</span>
-                        </a>
-                    </li>
-                </ul>-->
-            </li>
             <!--Charts-->
             <li>
                 <a href="#" class="menu-dropdown">
@@ -263,13 +229,7 @@
                     </li>
                 </ul>-->
             </li>
-            <!--Profile-->
-            <li>
-                <a href="#">
-                    <i class="menu-icon fa fa-picture-o"></i>
-                    <span class="menu-text">Edit Profile</span>
-                </a>
-            </li>
+
             <!--Mail-->
             <li>
                 <a href="#" class="menu-dropdown">
@@ -484,7 +444,7 @@
         //alert("had hide::::" + $("#initial").hasClass('hide'));
     });
 </script>
-<div id="footer" class="col-md-12" style="background-color:#008B8B;margin-top: 5px;height: 45px">
+<div id="footer" class="col-md-12" style="background-color:rgb(144, 150, 154);margin-top: 5px;height: 45px">
     <div class="col-md-9"></div>
     <div class="col-md-3">
         Copyright © 2012 - 2015 by <a href="https://www.Nextsphere.com">NextSphere</a>
